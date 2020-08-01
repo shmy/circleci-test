@@ -4,8 +4,27 @@ jobs:
   test:
     docker:
       - image: circleci/node:10
-
     steps:
       - checkout
       - run: npm install
       - run: npm test
+  build:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - run: echo "build successful"
+  deploy:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - run: echo "deploy successful"
+
+workflows:
+  version: 2
+  test-build-deploy:
+    jobs:
+      - test
+      - build
+      - deploy
