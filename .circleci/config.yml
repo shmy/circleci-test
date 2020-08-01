@@ -1,7 +1,7 @@
 
 version: 2
 jobs:
-  build2:
+  test:
     docker:
       - image: circleci/node:10
 
