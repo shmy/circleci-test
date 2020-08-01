@@ -14,7 +14,13 @@ jobs:
     steps:
       - checkout
       - run: echo "build successful"
-  deploy:
+  deployStgaing:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - run: echo "deploy successful"
+  deployProduction:
     docker:
       - image: circleci/node:10
     steps:
@@ -29,10 +35,17 @@ workflows:
       - build:
           requires:
             - test
-      - waitForConfirm:
+      - waitForConfirmToStaging:
           type: approval
           requires:
             - build
-      - deploy:
+      - waitForConfirmProduction:
+          type: approval
           requires:
-            - waitForConfirm
+            - build
+      - deployStgaing:
+          requires:
+            - waitForConfirmToStaging
+      - deployProduction:
+          requires:
+            - waitForConfirmProduction
