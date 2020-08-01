@@ -41,6 +41,9 @@ workflows:
       - build:
           requires:
             - test
+          filters:
+            tags:
+              only: v1.1
       - waitForConfirmToStaging:
           type: approval
           requires:
