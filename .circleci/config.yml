@@ -29,6 +29,10 @@ workflows:
       - build:
           requires:
             - test
-      - deploy:
+      - waitForConfirm:
+          type: approval
           requires:
             - build
+      - deploy:
+          requires:
+            - waitForConfirm
