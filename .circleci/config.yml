@@ -36,6 +36,8 @@ workflows:
             branches:
 #              only: master
               ignore: dev1
+            tags:
+              only: v1.0
       - build:
           requires:
             - test
