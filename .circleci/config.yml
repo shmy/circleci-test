@@ -26,9 +26,23 @@ jobs:
     steps:
       - checkout
       - run: echo "deploy successful"
-
+  cron-test:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - run: curl "https://www.baidu.com"
 workflows:
   version: 2
+  nightly:
+    triggers:
+      - schedule:
+          cron: "* * * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - cron-test
   test-build-deploy:
     jobs:
       - test:
