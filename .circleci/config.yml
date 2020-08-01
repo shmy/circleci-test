@@ -37,13 +37,13 @@ workflows:
 #              only: master
               ignore: dev1
             tags:
-              only: v1.1
+              only: v1.2
       - build:
           requires:
             - test
           filters:
             tags:
-              only: v1.1
+              only: v1.2
       - waitForConfirmToStaging:
           type: approval
           requires:
