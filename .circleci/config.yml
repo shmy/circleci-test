@@ -37,24 +37,36 @@ workflows:
 #              only: master
               ignore: dev1
             tags:
-              only: v1.2
+              only: /^v.*/
       - build:
           requires:
             - test
           filters:
             tags:
-              only: v1.2
+              only: /^v.*/
       - waitForConfirmToStaging:
           type: approval
           requires:
             - build
+          filters:
+            tags:
+              only: /^v.*/
       - waitForConfirmProduction:
           type: approval
           requires:
             - build
+          filters:
+            tags:
+              only: /^v.*/
       - deployStgaing:
           requires:
             - waitForConfirmToStaging
+          filters:
+            tags:
+              only: /^v.*/
       - deployProduction:
           requires:
             - waitForConfirmProduction
+          filters:
+            tags:
+              only: /^v.*/
