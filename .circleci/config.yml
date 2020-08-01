@@ -35,7 +35,7 @@ workflows:
           filters:
             branches:
 #              only: master
-              ignore: dev
+              ignore: dev1
       - build:
           requires:
             - test
