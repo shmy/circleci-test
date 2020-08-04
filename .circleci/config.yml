@@ -36,7 +36,7 @@ jobs:
     docker:
       - image: circleci/node:10
     steps:
-      - run: curl http://www.baidu.com
+      - run: curl $API_URL
 workflows:
   version: 2
   nightly:
