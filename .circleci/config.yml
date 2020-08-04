@@ -1,4 +1,6 @@
-
+only-tag: &only-tag
+  tags:
+    only: /^v.*/
 version: 2
 jobs:
   test:
@@ -78,6 +80,4 @@ workflows:
             - waitForConfirmProduction
           filters:
             <<: *only-tag
-only-tag: &only-tag
-  tags:
-    only: /^v.*/
+
