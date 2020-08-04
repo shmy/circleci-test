@@ -40,7 +40,7 @@ jobs:
 workflows:
   version: 2
   nightly:
-    triggers:
+    triggers1:
       - schedule:
           cron: "*/1 * * * *"
           filters:
