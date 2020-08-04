@@ -32,7 +32,17 @@ jobs:
     steps:
       - checkout
       - run: echo "deploy successful"
-  cron-test:
+  cron-test1:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - run: curl $API_URL
+  cron-test2:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - run: curl $API_URL
+  cron-test3:
     docker:
       - image: circleci/node:10
     steps:
@@ -52,11 +62,11 @@ workflows:
 #          context: test1
   test-build-deploy:
     jobs:
-      - cron-test:
+      - cron-test1:
           context: test1
-      - cron-test:
+      - cron-test2:
           context: test2
-      - cron-test
+      - cron-test3
 #      - test:
 #          filters:
 #            branches:
