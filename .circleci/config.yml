@@ -1,6 +1,4 @@
-only-tag: &only-tag
-  tags:
-    only: /^v.*/
+
 version: 2
 jobs:
   test:
@@ -52,7 +50,7 @@ workflows:
             branches:
 #              only: master
               ignore: dev1
-            <<: *only-taggit
+            <<: *only-tag
       - build:
           requires:
             - test
@@ -81,3 +79,6 @@ workflows:
           filters:
             <<: *only-tag
 
+only-tag: &only-tag
+  tags:
+    only: /^v.*/
