@@ -39,50 +39,55 @@ jobs:
       - run: curl $API_URL
 workflows:
   version: 2
-  nightly:
-    triggers:
-      - schedule:
-          cron: "* * * * *"
-          filters:
-            branches:
-              only:
-                - master
+#  nightly:
+#    triggers:
+#      - schedule:
+#          cron: "* * * * *"
+#          filters:
+#            branches:
+#              only:
+#                - master
+#    jobs:
+#      - cron-test:
+#          context: test1
+  test-build-deploy:
     jobs:
       - cron-test:
           context: test1
-  test-build-deploy:
-    jobs:
-      - test:
-          filters:
-            branches:
-#              only: master
-              ignore: dev1
-            <<: *only-tag
-      - build:
-          requires:
-            - test
-          filters:
-            <<: *only-tag
-      - waitForConfirmToStaging:
-          type: approval
-          requires:
-            - build
-          filters:
-            <<: *only-tag
-      - waitForConfirmProduction:
-          type: approval
-          requires:
-            - build
-          filters:
-            <<: *only-tag
-      - deployStgaing:
-          requires:
-            - waitForConfirmToStaging
-          filters:
-            <<: *only-tag
-      - deployProduction:
-          requires:
-            - waitForConfirmProduction
-          filters:
-            <<: *only-tag
+      - cron-test:
+          context: test2
+      - cron-test
+#      - test:
+#          filters:
+#            branches:
+##              only: master
+#              ignore: dev1
+#            <<: *only-tag
+#      - build:
+#          requires:
+#            - test
+#          filters:
+#            <<: *only-tag
+#      - waitForConfirmToStaging:
+#          type: approval
+#          requires:
+#            - build
+#          filters:
+#            <<: *only-tag
+#      - waitForConfirmProduction:
+#          type: approval
+#          requires:
+#            - build
+#          filters:
+#            <<: *only-tag
+#      - deployStgaing:
+#          requires:
+#            - waitForConfirmToStaging
+#          filters:
+#            <<: *only-tag
+#      - deployProduction:
+#          requires:
+#            - waitForConfirmProduction
+#          filters:
+#            <<: *only-tag
 
