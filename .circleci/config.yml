@@ -36,19 +36,19 @@ jobs:
     docker:
       - image: circleci/node:10
     steps:
-      - run: curl "https://www.baidu.com"
+      - run: curl $API_URL
 workflows:
   version: 2
-#  nightly:
-#    triggers:
-#      - schedule:
-#          cron: "0 0 1 1,4,7,11 *"
-#          filters:
-#            branches:
-#              only:
-#                - master
-#    jobs:
-#      - cron-test
+  nightly:
+    triggers:
+      - schedule:
+          cron: "*/1 * * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - cron-test
   test-build-deploy:
     jobs:
       - test:
