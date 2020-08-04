@@ -48,7 +48,8 @@ workflows:
               only:
                 - master
     jobs:
-      - cron-test
+      - cron-test:
+          context: test1
   test-build-deploy:
     jobs:
       - test:
