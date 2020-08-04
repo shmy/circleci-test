@@ -50,37 +50,34 @@ workflows:
             branches:
 #              only: master
               ignore: dev1
-            tags:
-              only: /^v.*/
+            >>: *only-taggit
       - build:
           requires:
             - test
           filters:
-            tags:
-              only: /^v.*/
+            >>: *only-tag
       - waitForConfirmToStaging:
           type: approval
           requires:
             - build
           filters:
-            tags:
-              only: /^v.*/
+            >>: *only-tag
       - waitForConfirmProduction:
           type: approval
           requires:
             - build
           filters:
-            tags:
-              only: /^v.*/
+            >>: *only-tag
       - deployStgaing:
           requires:
             - waitForConfirmToStaging
           filters:
-            tags:
-              only: /^v.*/
+            >>: *only-tag
       - deployProduction:
           requires:
             - waitForConfirmProduction
           filters:
-            tags:
-              only: /^v.*/
+            >>: *only-tag
+only-tag: &only-tag
+  tags:
+    only: /^v.*/
