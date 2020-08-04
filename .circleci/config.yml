@@ -1,6 +1,9 @@
-only-tag: &only-tag
+only-version-tag: &only-tag
   tags:
-    only: /^v.*/
+    only:
+      - v1.6
+      - v1.7
+    ignore: v1.7
 version: 2
 jobs:
   test:
