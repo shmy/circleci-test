@@ -3,7 +3,8 @@ only-version-tag: &only-tag
     only:
       - v1.6
       - v1.7
-    ignore: v1.7
+      - v1.9
+    ignore: v1.8
 version: 2
 jobs:
   test:
